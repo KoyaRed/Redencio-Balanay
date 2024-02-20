@@ -1,0 +1,60 @@
+import React, { Component } from 'react';
+import { StyleSheet, Switch, View, Text, Image } from 'react-native';
+
+export default class App extends Component {
+  state = {
+    switchValue: false
+  }
+
+  render() {
+    const { switchValue } = this.state;
+    const containerStyle = switchValue ? styles.containerYellow : styles.containerBlack;
+    const textStyle = switchValue ? styles.textStyleBlack : styles.textStyleWhite;
+    const bulbImageSource = switchValue 
+      ? { uri: 'https://raw.githubusercontent.com/KoyaRed/Redencio-Balanay/main/img/bulbOn.png' }
+      : { uri: 'https://raw.githubusercontent.com/KoyaRed/Redencio-Balanay/main/img/bulbOff.png' };
+
+    return (
+      <View style={[styles.container, containerStyle]}>
+      <Text style={[styles.textStyle, textStyle]}>AMC MP1</Text>
+        <Image source={bulbImageSource} style={styles.bulbImage} />
+        <Switch
+          style={{ marginBottom: 10 }}
+          value={switchValue}
+          onValueChange={(value) => this.setState({ switchValue: value })}
+        />
+        <Text style={[styles.textStyle, textStyle]}>{switchValue ? 'ON' : 'OFF'}</Text>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  containerBlack: {
+    backgroundColor: 'black',
+  },
+  containerYellow: {
+    backgroundColor: 'yellow',
+  },
+  textStyle: {
+    margin: 24,
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  textStyleWhite: {
+    color: 'white',
+  },
+  textStyleBlack: {
+    color: 'black',
+  },
+  bulbImage: {
+    width: '50%',
+    height: '50%',
+  },
+});
